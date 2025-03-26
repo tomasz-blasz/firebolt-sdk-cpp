@@ -63,6 +63,7 @@ target_link_libraries(${TESTAPP}
 target_include_directories(${TESTAPP}
     PRIVATE
         $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include/>
+        $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/generated/${SDK_TARGET}/include/>
 )
 
 if (POLYMORPHICS_REDUCER_METHODS)
@@ -112,6 +113,7 @@ if(ENABLE_UNIT_TESTS)
         PRIVATE
             $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include/>
             $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/>
+            $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/generated/${SDK_TARGET}/include/>
     )
 
     set_target_properties(${UNIT_TESTS_APP} PROPERTIES

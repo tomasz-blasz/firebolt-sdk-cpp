@@ -22,18 +22,24 @@ project(Firebolt)
 set(FIREBOLT_TRANSPORT_WAITTIME 1000 CACHE STRING "Maximum time to wait for Transport layer to get response")
 set(FIREBOLT_LOGLEVEL "Info" CACHE STRING  "Log level to be enabled")
 
+set(SDK_TARGET "" CACHE STRING "Target SDK to build: core, manage, discovery")
+
 # Default options
 option(FIREBOLT_ENABLE_STATIC_LIB "Create Firebolt library as Static library" OFF)
-option(ENABLE_BIDIRECTIONAL "Enable bidirectional communication over WS" OFF)
+option(ENABLE_BIDIRECTIONAL "Enable bidirectional communication over WS" ON)
 option(ENABLE_TESTS "Build openrpc native test" ON)
 option(ENABLE_UNIT_TESTS "Enable unit test" ON)
 option(ENABLE_COVERAGE "Enable code coverage build." ON)
 option(ENABLE_INTERACTIVE_APP "Enable interactive application" OFF)
 option(FIREBOLT_PLAIN_LOG "Disable log coloring" OFF)
 
-set(SDK_TARGET "core" CACHE STRING "SDK to built")
+if (NOT SDK_TARGET)
+    message(FATAL_ERROR "SDK_TARGET is not set [${SDK_TARGET}]")
+endif ()
 
+message("Building SDK: ${SDK_TARGET}")
 add_compile_definitions(SDK_TARGET=${SDK_TARGET})
+add_compile_definitions(JSON_ENGINE_OPENRPC_FILE="${CMAKE_CURRENT_SOURCE_DIR}/../generated/${SDK_TARGET}/firebolt-${SDK_TARGET}-open-rpc.json")
 
 include_directories(
     ${SDK_TARGET}/include
@@ -41,11 +47,8 @@ include_directories(
 )
 
 file(GLOB APP_SCHEMA "./generated/${SDK_TARGET}/firebolt-${SDK_TARGET}-app-open-rpc.json")
-if (APP_SCHEMA)
-  message("APP schema present")
-  set(ENABLE_BIDIRECTIONAL ON)
-else()
-  message("APP schema not present")
+if (NOT APP_SCHEMA)
+  set(ENABLE_BIDIRECTIONAL OFF)
 endif ()
 
 if (ENABLE_BIDIRECTIONAL)
@@ -55,7 +58,6 @@ else ()
     message("Using unidirectional gateway")
 endif ()
 
-set(ENABLE_UNIT_TESTS OFF)
 if (ENABLE_INTERACTIVE_APP)
     set(ENABLE_TESTS ON)
     set(ENABLE_UNIT_TESTS OFF)
@@ -65,7 +67,6 @@ endif ()
 if (FIREBOLT_PLAIN_LOG)
     add_compile_definitions(LOGGER_NO_COLOR)
 endif ()
-
 
 if (FIREBOLT_ENABLE_STATIC_LIB)
     set(FIREBOLT_LIBRARY_TYPE STATIC)
@@ -148,10 +149,8 @@ add_subdirectory(src)
 
 if (ENABLE_TESTS OR ENABLE_UNIT_TESTS)
     enable_testing()
-    add_subdirectory(test)
+    add_subdirectory(test/${SDK_TARGET})
 endif()
-
-
 
 # make sure others can make use cmake settings of Firebolt OpenRPC
 configure_file( "${CMAKE_SOURCE_DIR}/cmake/project.cmake.in"

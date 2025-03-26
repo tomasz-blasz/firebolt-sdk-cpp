@@ -35,7 +35,6 @@ using namespace ::testing;
 #define REMOVE_QUOTES(s) (s.substr(1, s.length() - 2))
 #define STRING_TO_BOOL(s) (s == "true" ? true : false)
 
-
 inline std::string capitalizeFirstChar(std::string str) {
     if (!str.empty()) {
         str[0] = std::toupper(str[0]);
@@ -76,28 +75,12 @@ class JsonEngine
 
         json read_json_from_file()
         {
-            std::vector<std::string> openRpcFiles = {
-                "firebolt-core-open-rpc.json",
-                "firebolt-manage-open-rpc.json",
-                "firebolt-discovery-open-rpc.json"
-                };
-            std::string filename;
-            for (const auto& file : openRpcFiles) 
-            {
+            std::string openRpcSpec = JSON_ENGINE_OPENRPC_FILE;
 
-                std::string filePath = std::filesystem::current_path() / ".." / ".." / file;
-
-                if (std::filesystem::exists(filePath)) 
-                {
-                    filename = filePath;
-                    break;
-                }
-    
-            }
-            std::ifstream file(filename);
-            if (!file.is_open())
+            std::ifstream file(openRpcSpec);
+            if (!std::filesystem::exists(openRpcSpec) || !file.is_open())
             {
-                throw std::runtime_error("Could not open file: " + filename);
+                throw std::runtime_error("Could not open file: " + openRpcSpec);
             }
 
             json j;

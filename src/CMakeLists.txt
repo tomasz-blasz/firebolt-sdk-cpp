@@ -19,9 +19,10 @@ cmake_minimum_required(VERSION 3.3)
 project(FireboltSDK)
 project_version(1.0.0)
 set(TARGET ${PROJECT_NAME})
-message("Setup ${TARGET} v${PROJECT_VERSION}")
+message("Setup ${TARGET} v${PROJECT_VERSION} - ${SDK_TARGET}")
 
 file(GLOB SOURCES *.cpp)
+
 list(APPEND SOURCES
     Logger/Logger.cpp
     Gateway/Gateway.cpp
@@ -35,6 +36,9 @@ if (ENABLE_BIDIRECTIONAL)
 else ()
     list(APPEND SOURCES Event/unidi/Event.cpp)
 endif ()
+
+file(GLOB SOURCES_GENERATED ../generated/${SDK_TARGET}/src/*.cpp)
+list(APPEND SOURCES ${SOURCES_GENERATED})
 
 add_library(${TARGET} ${FIREBOLT_LIBRARY_TYPE} ${SOURCES})
 
@@ -60,6 +64,7 @@ target_link_libraries(${TARGET}
 target_include_directories(${TARGET}
     PRIVATE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../generated/${SDK_TARGET}/include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}>
 )
 

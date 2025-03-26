@@ -64,6 +64,7 @@ target_include_directories(${TESTAPP}
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SRC_DIR}/>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SRC_DIR}/../>
         $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include/>
+        $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/generated/${SDK_TARGET}/include/>
 )
 
 set_target_properties(${TESTAPP} PROPERTIES
@@ -107,6 +108,7 @@ if(ENABLE_UNIT_TESTS OR ENABLE_INTERACTIVE_APP)
     target_include_directories(${UNIT_TESTS_APP}
         PRIVATE
             $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include/>
+            $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/generated/${SDK_TARGET}/include/>
     )
 
     set_target_properties(${UNIT_TESTS_APP} PROPERTIES
