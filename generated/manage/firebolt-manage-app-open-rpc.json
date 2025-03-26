@@ -1,0 +1,3006 @@
+{
+	"openrpc": "1.2.4",
+	"info": {
+		"title": "Firebolt Manage SDK",
+		"version": "1.5.0-integration",
+		"x-interface-names": {
+			"xrn:firebolt:capability:lifecycle:state": "StateProvider"
+		}
+	},
+	"methods": [
+		{
+			"name": "Localization.localityChanged",
+			"tags": [
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:localization:locality"
+					]
+				},
+				{
+					"name": "notifier",
+					"x-notifier-for": "Localization.locality",
+					"x-event": "Localization.onLocalityChanged"
+				}
+			],
+			"summary": "Get the locality/city the device is located in",
+			"params": [
+				{
+					"name": "locality",
+					"summary": "the device city",
+					"schema": {
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/localization#/definitions/Locality"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "Default Result",
+							"value": "Philadelphia"
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "Default Result",
+							"value": "Rockville"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Localization.postalCodeChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "Localization.postalCode",
+					"x-event": "Localization.onPostalCodeChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:localization:postal-code"
+					]
+				}
+			],
+			"summary": "Get the postal code the device is located in",
+			"params": [
+				{
+					"name": "postalCode",
+					"summary": "the device postal code",
+					"schema": {
+						"type": "string"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "Default Result",
+							"value": "19103"
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "Default Result",
+							"value": "20850"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Localization.countryCodeChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "Localization.countryCode",
+					"x-event": "Localization.onCountryCodeChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:localization:country-code"
+					]
+				}
+			],
+			"summary": "Get the ISO 3166-1 alpha-2 code for the country device is located in",
+			"params": [
+				{
+					"name": "code",
+					"summary": "the device country code",
+					"schema": {
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/localization#/definitions/CountryCode"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "Default Result",
+							"value": "US"
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "Default Result",
+							"value": "UK"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Localization.languageChanged",
+			"summary": "Get the ISO 639 1/2 code for the preferred language",
+			"params": [
+				{
+					"name": "lang",
+					"summary": "the device language",
+					"schema": {
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/localization#/definitions/Language"
+					}
+				}
+			],
+			"tags": [
+				{
+					"name": "deprecated",
+					"x-since": "0.17.0",
+					"x-alternative": "Localization.locale"
+				},
+				{
+					"name": "notifier",
+					"x-notifier-for": "Localization.language",
+					"x-event": "Localization.onLanguageChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:localization:language"
+					]
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "Default Result",
+							"value": "en"
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "Default Result",
+							"value": "es"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Localization.preferredAudioLanguagesChanged",
+			"summary": "A prioritized list of ISO 639 1/2 codes for the preferred audio languages on this device.",
+			"params": [
+				{
+					"name": "languages",
+					"summary": "the preferred audio languages",
+					"schema": {
+						"type": "array",
+						"items": {
+							"$ref": "https://meta.rdkcentral.com/firebolt/schemas/localization#/definitions/ISO639_2Language"
+						}
+					}
+				}
+			],
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "Localization.preferredAudioLanguages",
+					"x-event": "Localization.onPreferredAudioLanguagesChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:localization:language"
+					]
+				}
+			],
+			"examples": [
+				{
+					"name": "Default Example",
+					"params": [
+						{
+							"name": "Default Result",
+							"value": [
+								"spa",
+								"eng"
+							]
+						}
+					]
+				},
+				{
+					"name": "Default Example #2",
+					"params": [
+						{
+							"name": "Default Result",
+							"value": [
+								"eng",
+								"spa"
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Localization.localeChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "Localization.locale",
+					"x-event": "Localization.onLocaleChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:localization:locale"
+					]
+				}
+			],
+			"summary": "Get the *full* BCP 47 code, including script, region, variant, etc., for the preferred langauage/locale",
+			"params": [
+				{
+					"name": "locale",
+					"summary": "the device locale",
+					"schema": {
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/localization#/definitions/Locale"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "Default Result",
+							"value": "en-US"
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "Default Result",
+							"value": "es-US"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Localization.timeZoneChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "Localization.timeZone",
+					"x-event": "Localization.onTimeZoneChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:localization:time-zone"
+					]
+				}
+			],
+			"summary": "Set the IANA timezone for the device",
+			"params": [
+				{
+					"name": "result",
+					"schema": {
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/localization#/definitions/TimeZone"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default Example",
+					"params": [
+						{
+							"name": "Default Result",
+							"value": "America/New_York"
+						}
+					]
+				},
+				{
+					"name": "Additional Example",
+					"params": [
+						{
+							"name": "Default Result",
+							"value": "America/Los_Angeles"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ClosedCaptions.enabledChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "ClosedCaptions.enabled",
+					"x-event": "ClosedCaptions.onEnabledChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:accessibility:closedcaptions"
+					]
+				}
+			],
+			"summary": "Whether or not closed-captions are enabled.",
+			"params": [
+				{
+					"name": "enabled",
+					"schema": {
+						"type": "boolean"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "enabled",
+							"value": true
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "enabled",
+							"value": false
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ClosedCaptions.fontFamilyChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "ClosedCaptions.fontFamily",
+					"x-event": "ClosedCaptions.onFontFamilyChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:accessibility:closedcaptions"
+					]
+				}
+			],
+			"summary": "The preferred font family for displaying closed-captions.",
+			"params": [
+				{
+					"name": "family",
+					"schema": {
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/accessibility#/definitions/FontFamily"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "family",
+							"value": "monospaced_sanserif"
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "family",
+							"value": "cursive"
+						}
+					]
+				},
+				{
+					"name": "Default example #3",
+					"params": [
+						{
+							"name": "family",
+							"value": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ClosedCaptions.fontSizeChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "ClosedCaptions.fontSize",
+					"x-event": "ClosedCaptions.onFontSizeChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:accessibility:closedcaptions"
+					]
+				}
+			],
+			"summary": "The preferred font size for displaying closed-captions.",
+			"params": [
+				{
+					"name": "size",
+					"schema": {
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/accessibility#/definitions/FontSize"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "size",
+							"value": 1
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "size",
+							"value": 1
+						}
+					]
+				},
+				{
+					"name": "Default example #3",
+					"params": [
+						{
+							"name": "size",
+							"value": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ClosedCaptions.fontColorChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "ClosedCaptions.fontColor",
+					"x-event": "ClosedCaptions.onFontColorChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:accessibility:closedcaptions"
+					]
+				}
+			],
+			"summary": "The preferred font color for displaying closed-captions.",
+			"params": [
+				{
+					"name": "color",
+					"schema": {
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/accessibility#/definitions/Color"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "color",
+							"value": "#ffffff"
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "color",
+							"value": "#000000"
+						}
+					]
+				},
+				{
+					"name": "Default example #3",
+					"params": [
+						{
+							"name": "color",
+							"value": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ClosedCaptions.fontEdgeChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "ClosedCaptions.fontEdge",
+					"x-event": "ClosedCaptions.onFontEdgeChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:accessibility:closedcaptions"
+					]
+				}
+			],
+			"summary": "The preferred font edge style for displaying closed-captions.",
+			"params": [
+				{
+					"name": "edge",
+					"schema": {
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/accessibility#/definitions/FontEdge"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "edge",
+							"value": "none"
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "edge",
+							"value": "uniform"
+						}
+					]
+				},
+				{
+					"name": "Default example #3",
+					"params": [
+						{
+							"name": "edge",
+							"value": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ClosedCaptions.fontEdgeColorChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "ClosedCaptions.fontEdgeColor",
+					"x-event": "ClosedCaptions.onFontEdgeColorChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:accessibility:closedcaptions"
+					]
+				}
+			],
+			"summary": "The preferred font edge color for displaying closed-captions.",
+			"params": [
+				{
+					"name": "color",
+					"schema": {
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/accessibility#/definitions/Color"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "color",
+							"value": "#000000"
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "color",
+							"value": "#ffffff"
+						}
+					]
+				},
+				{
+					"name": "Default example #3",
+					"params": [
+						{
+							"name": "color",
+							"value": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ClosedCaptions.fontOpacityChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "ClosedCaptions.fontOpacity",
+					"x-event": "ClosedCaptions.onFontOpacityChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:accessibility:closedcaptions"
+					]
+				}
+			],
+			"summary": "The preferred opacity for displaying closed-captions characters.",
+			"params": [
+				{
+					"name": "opacity",
+					"schema": {
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/accessibility#/definitions/Opacity"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "opacity",
+							"value": 99
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "opacity",
+							"value": 100
+						}
+					]
+				},
+				{
+					"name": "Default example #3",
+					"params": [
+						{
+							"name": "opacity",
+							"value": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ClosedCaptions.backgroundColorChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "ClosedCaptions.backgroundColor",
+					"x-event": "ClosedCaptions.onBackgroundColorChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:accessibility:closedcaptions"
+					]
+				}
+			],
+			"summary": "The preferred background color for displaying closed-captions, .",
+			"params": [
+				{
+					"name": "color",
+					"schema": {
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/accessibility#/definitions/Color"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "color",
+							"value": "#000000"
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "color",
+							"value": "#ffffff"
+						}
+					]
+				},
+				{
+					"name": "Default example #3",
+					"params": [
+						{
+							"name": "color",
+							"value": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ClosedCaptions.backgroundOpacityChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "ClosedCaptions.backgroundOpacity",
+					"x-event": "ClosedCaptions.onBackgroundOpacityChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:accessibility:closedcaptions"
+					]
+				}
+			],
+			"summary": "The preferred opacity for displaying closed-captions backgrounds.",
+			"params": [
+				{
+					"name": "opacity",
+					"schema": {
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/accessibility#/definitions/Opacity"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "opacity",
+							"value": 99
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "opacity",
+							"value": 100
+						}
+					]
+				},
+				{
+					"name": "Default example #3",
+					"params": [
+						{
+							"name": "opacity",
+							"value": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ClosedCaptions.textAlignChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "ClosedCaptions.textAlign",
+					"x-event": "ClosedCaptions.onTextAlignChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:accessibility:closedcaptions"
+					]
+				}
+			],
+			"summary": "The preferred horizontal alignment for displaying closed-captions characters.",
+			"params": [
+				{
+					"name": "alignment",
+					"schema": {
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/accessibility#/definitions/HorizontalAlignment"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "alignment",
+							"value": "center"
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "alignment",
+							"value": "left"
+						}
+					]
+				},
+				{
+					"name": "Default example #3",
+					"params": [
+						{
+							"name": "alignment",
+							"value": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ClosedCaptions.textAlignVerticalChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "ClosedCaptions.textAlignVertical",
+					"x-event": "ClosedCaptions.onTextAlignVerticalChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:accessibility:closedcaptions"
+					]
+				}
+			],
+			"summary": "The preferred horizontal alignment for displaying closed-captions characters.",
+			"params": [
+				{
+					"name": "alignment",
+					"schema": {
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/accessibility#/definitions/VerticalAlignment"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "alignment",
+							"value": "middle"
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "alignment",
+							"value": "top"
+						}
+					]
+				},
+				{
+					"name": "Default example #3",
+					"params": [
+						{
+							"name": "alignment",
+							"value": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ClosedCaptions.windowColorChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "ClosedCaptions.windowColor",
+					"x-event": "ClosedCaptions.onWindowColorChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:accessibility:closedcaptions"
+					]
+				}
+			],
+			"summary": "The preferred window color for displaying closed-captions, .",
+			"params": [
+				{
+					"name": "color",
+					"schema": {
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/accessibility#/definitions/Color"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "color",
+							"value": "#000000"
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "color",
+							"value": "white"
+						}
+					]
+				},
+				{
+					"name": "Default example #3",
+					"params": [
+						{
+							"name": "color",
+							"value": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ClosedCaptions.windowOpacityChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "ClosedCaptions.windowOpacity",
+					"x-event": "ClosedCaptions.onWindowOpacityChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:accessibility:closedcaptions"
+					]
+				}
+			],
+			"summary": "The preferred window opacity for displaying closed-captions backgrounds.",
+			"params": [
+				{
+					"name": "opacity",
+					"schema": {
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/accessibility#/definitions/Opacity"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "opacity",
+							"value": 99
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "opacity",
+							"value": 100
+						}
+					]
+				},
+				{
+					"name": "Default example #3",
+					"params": [
+						{
+							"name": "opacity",
+							"value": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ClosedCaptions.preferredLanguagesChanged",
+			"summary": "A prioritized list of ISO 639-2/B codes for the preferred closed captions languages on this device.",
+			"params": [
+				{
+					"name": "languages",
+					"summary": "the preferred closed captions languages",
+					"schema": {
+						"type": "array",
+						"items": {
+							"$ref": "https://meta.rdkcentral.com/firebolt/schemas/localization#/definitions/ISO639_2Language"
+						}
+					}
+				}
+			],
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "ClosedCaptions.preferredLanguages",
+					"x-event": "ClosedCaptions.onPreferredLanguagesChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:accessibility:closedcaptions"
+					]
+				}
+			],
+			"examples": [
+				{
+					"name": "Default Example",
+					"params": [
+						{
+							"name": "Default Result",
+							"value": [
+								"spa",
+								"eng"
+							]
+						}
+					]
+				},
+				{
+					"name": "Default Example #2",
+					"params": [
+						{
+							"name": "Default Result",
+							"value": [
+								"eng",
+								"spa"
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "AudioDescriptions.enabledChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "AudioDescriptions.enabled",
+					"x-event": "AudioDescriptions.onEnabledChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:accessibility:audiodescriptions"
+					]
+				}
+			],
+			"summary": "Whether or not audio-descriptions are enabled.",
+			"params": [
+				{
+					"name": "enabled",
+					"schema": {
+						"type": "boolean"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "enabled",
+							"value": true
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "enabled",
+							"value": false
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "VoiceGuidance.enabledChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "VoiceGuidance.enabled",
+					"x-event": "VoiceGuidance.onEnabledChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:accessibility:voiceguidance"
+					]
+				}
+			],
+			"summary": "Whether or not voice-guidance is enabled.",
+			"params": [
+				{
+					"name": "enabled",
+					"schema": {
+						"type": "boolean"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Voice guidance enabled",
+					"params": [
+						{
+							"name": "enabled",
+							"value": true
+						}
+					]
+				},
+				{
+					"name": "Voice guidance disabled",
+					"params": [
+						{
+							"name": "enabled",
+							"value": false
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "VoiceGuidance.navigationHintsChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "VoiceGuidance.navigationHints",
+					"x-event": "VoiceGuidance.onNavigationHintsChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:accessibility:voiceguidance"
+					]
+				}
+			],
+			"summary": "The user's preference for whether additional navigation hints should be synthesized.",
+			"params": [
+				{
+					"name": "navigationHints",
+					"schema": {
+						"type": "boolean"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Navigation hints enabled",
+					"params": [
+						{
+							"name": "navigationHints",
+							"value": true
+						}
+					]
+				},
+				{
+					"name": "Navigation hints disabled",
+					"params": [
+						{
+							"name": "navigationHints",
+							"value": false
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "VoiceGuidance.rateChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "VoiceGuidance.rate",
+					"x-event": "VoiceGuidance.onRateChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:accessibility:voiceguidance"
+					]
+				}
+			],
+			"summary": "The rate at which voice guidance speech will be read back to the user.",
+			"params": [
+				{
+					"name": "rate",
+					"schema": {
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/accessibility#/definitions/SpeechRate"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Normal voice guidance speech rate",
+					"params": [
+						{
+							"name": "rate",
+							"value": 1
+						}
+					]
+				},
+				{
+					"name": "Doubled voice guidance speech rate",
+					"params": [
+						{
+							"name": "rate",
+							"value": 2
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "VoiceGuidance.speedChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "VoiceGuidance.speed",
+					"x-event": "VoiceGuidance.onSpeedChanged"
+				},
+				{
+					"name": "deprecated",
+					"x-alternative": "VoiceGuidance.rate()",
+					"x-since": "1.5.0"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:accessibility:voiceguidance"
+					]
+				}
+			],
+			"summary": "The speed at which voice guidance speech will be read back to the user.",
+			"params": [
+				{
+					"name": "speed",
+					"schema": {
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/accessibility#/definitions/SpeechRate"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Normal voice guidance speech rate",
+					"params": [
+						{
+							"name": "speed",
+							"value": 1
+						}
+					]
+				},
+				{
+					"name": "Doubled voice guidance speech rate",
+					"params": [
+						{
+							"name": "speed",
+							"value": 2
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Device.deviceNameChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-event": "Device.onDeviceNameChanged"
+				},
+				{
+					"name": "deprecated",
+					"x-since": "0.6.0",
+					"x-alternative": "Device.name()"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:device:name"
+					]
+				}
+			],
+			"summary": "Get the human readable name of the device",
+			"params": [
+				{
+					"name": "value",
+					"summary": "the device friendly-name",
+					"schema": {
+						"type": "string"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Getting the device name",
+					"params": [
+						{
+							"name": "Default Result",
+							"value": "Living Room"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Device.nameChanged",
+			"summary": "The human readable name of the device",
+			"params": [
+				{
+					"name": "value",
+					"summary": "the device friendly-name",
+					"schema": {
+						"type": "string"
+					}
+				}
+			],
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "Device.name",
+					"x-event": "Device.onNameChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:device:name"
+					]
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "Default Result",
+							"value": "Living Room"
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "Default Result",
+							"value": "Kitchen"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Privacy.allowResumePointsChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-allow-value": true,
+					"x-notifier-for": "Privacy.allowResumePoints",
+					"x-event": "Privacy.onAllowResumePointsChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:privacy:settings"
+					]
+				}
+			],
+			"summary": "Whether the user allows resume points for content to show in the main experience",
+			"params": [
+				{
+					"name": "allow",
+					"schema": {
+						"type": "boolean"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "allow",
+							"value": true
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "allow",
+							"value": false
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Privacy.allowUnentitledResumePointsChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-allow-value": true,
+					"x-notifier-for": "Privacy.allowUnentitledResumePoints",
+					"x-event": "Privacy.onAllowUnentitledResumePointsChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:privacy:settings"
+					]
+				}
+			],
+			"summary": "Whether the user allows resume points for content from unentitled providers to show in the main experience",
+			"params": [
+				{
+					"name": "allow",
+					"schema": {
+						"type": "boolean"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "allow",
+							"value": true
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "allow",
+							"value": false
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Privacy.allowWatchHistoryChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-allow-value": true,
+					"x-notifier-for": "Privacy.allowWatchHistory",
+					"x-event": "Privacy.onAllowWatchHistoryChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:privacy:settings"
+					]
+				}
+			],
+			"summary": "Whether the user allows their watch history from all sources to show in the main experience",
+			"params": [
+				{
+					"name": "allow",
+					"schema": {
+						"type": "boolean"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "allow",
+							"value": true
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "allow",
+							"value": false
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Privacy.allowProductAnalyticsChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-allow-value": true,
+					"x-notifier-for": "Privacy.allowProductAnalytics",
+					"x-event": "Privacy.onAllowProductAnalyticsChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:privacy:settings"
+					]
+				}
+			],
+			"summary": "Whether the user allows their usage data can be used for analytics about the product",
+			"params": [
+				{
+					"name": "allow",
+					"schema": {
+						"type": "boolean"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "allow",
+							"value": true
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "allow",
+							"value": false
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Privacy.allowPersonalizationChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-allow-value": true,
+					"x-notifier-for": "Privacy.allowPersonalization",
+					"x-event": "Privacy.onAllowPersonalizationChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:privacy:settings"
+					]
+				}
+			],
+			"summary": "Whether the user allows their usage data to be used for personalization and recommendations",
+			"params": [
+				{
+					"name": "allow",
+					"schema": {
+						"type": "boolean"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "allow",
+							"value": true
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "allow",
+							"value": false
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Privacy.allowUnentitledPersonalizationChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-allow-value": true,
+					"x-notifier-for": "Privacy.allowUnentitledPersonalization",
+					"x-event": "Privacy.onAllowUnentitledPersonalizationChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:privacy:settings"
+					]
+				}
+			],
+			"summary": "Whether the user allows their usage data to be used for personalization and recommendations for unentitled content",
+			"params": [
+				{
+					"name": "allow",
+					"schema": {
+						"type": "boolean"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "allow",
+							"value": true
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "allow",
+							"value": false
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Privacy.allowRemoteDiagnosticsChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-allow-value": true,
+					"x-notifier-for": "Privacy.allowRemoteDiagnostics",
+					"x-event": "Privacy.onAllowRemoteDiagnosticsChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:privacy:settings"
+					]
+				}
+			],
+			"summary": "Whether the user allows their personal data to be included in diagnostic telemetry. This also allows whether device logs can be remotely accessed from the client device",
+			"params": [
+				{
+					"name": "allow",
+					"schema": {
+						"type": "boolean"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "allow",
+							"value": true
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "allow",
+							"value": false
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Privacy.allowPrimaryContentAdTargetingChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-allow-value": true,
+					"x-notifier-for": "Privacy.allowPrimaryContentAdTargeting",
+					"x-event": "Privacy.onAllowPrimaryContentAdTargetingChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:privacy:settings"
+					]
+				}
+			],
+			"summary": "Whether the user allows ads to be targeted to the user while watching content in the primary experience",
+			"params": [
+				{
+					"name": "allow",
+					"schema": {
+						"type": "boolean"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "allow",
+							"value": true
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "allow",
+							"value": false
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Privacy.allowPrimaryBrowseAdTargetingChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-allow-value": true,
+					"x-notifier-for": "Privacy.allowPrimaryBrowseAdTargeting",
+					"x-event": "Privacy.onAllowPrimaryBrowseAdTargetingChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:privacy:settings"
+					]
+				}
+			],
+			"summary": "Whether the user allows ads to be targeted to the user while browsing in the primary experience",
+			"params": [
+				{
+					"name": "allow",
+					"schema": {
+						"type": "boolean"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "allow",
+							"value": true
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "allow",
+							"value": false
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Privacy.allowAppContentAdTargetingChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-allow-value": true,
+					"x-notifier-for": "Privacy.allowAppContentAdTargeting",
+					"x-event": "Privacy.onAllowAppContentAdTargetingChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:privacy:settings"
+					]
+				}
+			],
+			"summary": "Whether the user allows ads to be targeted to the user while watching content in apps",
+			"params": [
+				{
+					"name": "allow",
+					"schema": {
+						"type": "boolean"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "allow",
+							"value": true
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "allow",
+							"value": false
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Privacy.allowACRCollectionChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-allow-value": true,
+					"x-notifier-for": "Privacy.allowACRCollection",
+					"x-event": "Privacy.onAllowACRCollectionChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:privacy:settings"
+					]
+				}
+			],
+			"summary": "Whether the user allows their automatic content recognition data to be collected",
+			"params": [
+				{
+					"name": "allow",
+					"schema": {
+						"type": "boolean"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "allow",
+							"value": true
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "allow",
+							"value": false
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Privacy.allowCameraAnalyticsChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-allow-value": true,
+					"x-notifier-for": "Privacy.allowCameraAnalytics",
+					"x-event": "Privacy.onAllowCameraAnalyticsChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:privacy:settings"
+					]
+				}
+			],
+			"summary": "Whether the user allows data from their camera to be used for Product Analytics",
+			"params": [
+				{
+					"name": "allow",
+					"schema": {
+						"type": "boolean"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default example #1",
+					"params": [
+						{
+							"name": "allow",
+							"value": true
+						}
+					]
+				},
+				{
+					"name": "Default example #2",
+					"params": [
+						{
+							"name": "allow",
+							"value": false
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Advertising.skipRestrictionChanged",
+			"summary": "Set the value for AdPolicy.skipRestriction",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-notifier-for": "Advertising.skipRestriction",
+					"x-event": "Advertising.onSkipRestrictionChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-manages": [
+						"xrn:firebolt:capability:advertising:configuration"
+					]
+				}
+			],
+			"params": [
+				{
+					"name": "result",
+					"schema": {
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/advertising#/definitions/SkipRestriction"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default Example",
+					"params": [
+						{
+							"name": "result",
+							"value": "none"
+						}
+					]
+				},
+				{
+					"name": "Additional Example",
+					"params": [
+						{
+							"name": "result",
+							"value": "all"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Keyboard.email",
+			"tags": [
+				{
+					"name": "capabilities",
+					"x-provides": "xrn:firebolt:capability:input:keyboard",
+					"x-allow-focus": true
+				}
+			],
+			"summary": "Prompt the user for their email address with a simplified list of choices.",
+			"params": [
+				{
+					"name": "type",
+					"summary": "Why the email is being requested, e.g. sign on or sign up",
+					"required": true,
+					"schema": {
+						"$ref": "#/components/schemas/Keyboard.EmailUsage"
+					}
+				},
+				{
+					"name": "message",
+					"summary": "The message to display while prompting",
+					"required": false,
+					"schema": {
+						"type": "string"
+					}
+				}
+			],
+			"result": {
+				"name": "email",
+				"summary": "the selected or entered email",
+				"schema": {
+					"type": "string"
+				}
+			},
+			"examples": [
+				{
+					"name": "Prompt the user to select or type an email address",
+					"params": [
+						{
+							"name": "type",
+							"value": "signIn"
+						},
+						{
+							"name": "message",
+							"value": "Enter your email to sign into this app"
+						}
+					],
+					"result": {
+						"name": "Default Result",
+						"value": "user@domain.com"
+					}
+				},
+				{
+					"name": "Prompt the user to type an email address to sign up",
+					"params": [
+						{
+							"name": "type",
+							"value": "signUp"
+						},
+						{
+							"name": "message",
+							"value": "Enter your email to sign up for this app"
+						}
+					],
+					"result": {
+						"name": "Default Result",
+						"value": "user@domain.com"
+					}
+				}
+			]
+		},
+		{
+			"name": "Keyboard.password",
+			"tags": [
+				{
+					"name": "capabilities",
+					"x-provides": "xrn:firebolt:capability:input:keyboard",
+					"x-allow-focus": true
+				}
+			],
+			"summary": "Show the password entry keyboard, with typing obfuscated from visibility",
+			"params": [
+				{
+					"name": "message",
+					"summary": "The message to display while prompting",
+					"required": false,
+					"schema": {
+						"type": "string"
+					}
+				}
+			],
+			"result": {
+				"name": "value",
+				"summary": "the selected or entered password",
+				"schema": {
+					"type": "string"
+				}
+			},
+			"examples": [
+				{
+					"name": "Prompt the user to enter their password",
+					"params": [
+						{
+							"name": "message",
+							"value": "Enter your password"
+						}
+					],
+					"result": {
+						"name": "Default Result",
+						"value": "abc123"
+					}
+				}
+			]
+		},
+		{
+			"name": "Keyboard.standard",
+			"tags": [
+				{
+					"name": "capabilities",
+					"x-provides": "xrn:firebolt:capability:input:keyboard",
+					"x-allow-focus": true
+				}
+			],
+			"summary": "Show the standard platform keyboard, and return the submitted value",
+			"params": [
+				{
+					"name": "message",
+					"summary": "The message to display while prompting",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}
+			],
+			"result": {
+				"name": "value",
+				"summary": "the selected or entered text",
+				"schema": {
+					"type": "string"
+				}
+			},
+			"examples": [
+				{
+					"name": "Prompt the user for an arbitrary string",
+					"params": [
+						{
+							"name": "message",
+							"value": "Enter the name you'd like to associate with this device"
+						}
+					],
+					"result": {
+						"name": "Default Result",
+						"value": "Living Room"
+					}
+				}
+			]
+		},
+		{
+			"name": "AcknowledgeChallenge.challenge",
+			"summary": "Registers as a provider for when the user should be challenged in order to confirm access to a capability",
+			"params": [
+				{
+					"name": "capability",
+					"required": true,
+					"schema": {
+						"type": "string",
+						"description": "The capability that is being requested by the user to approve"
+					}
+				},
+				{
+					"name": "requestor",
+					"required": true,
+					"schema": {
+						"description": "The identity of which app is requesting access to this capability",
+						"$ref": "#/components/schemas/AcknowledgeChallenge.ChallengeRequestor"
+					}
+				}
+			],
+			"tags": [
+				{
+					"name": "capabilities",
+					"x-provides": "xrn:firebolt:capability:usergrant:acknowledgechallenge",
+					"x-allow-focus": true
+				}
+			],
+			"result": {
+				"name": "result",
+				"schema": {
+					"$ref": "#/components/schemas/AcknowledgeChallenge.GrantResult"
+				}
+			},
+			"examples": [
+				{
+					"name": "Default Example",
+					"params": [
+						{
+							"name": "capability",
+							"value": "xrn:firebolt:capability:localization::postal-code"
+						},
+						{
+							"name": "requestor",
+							"value": {
+								"id": "ReferenceApp",
+								"name": "Firebolt Reference App"
+							}
+						}
+					],
+					"result": {
+						"name": "result",
+						"value": {
+							"granted": true
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "PinChallenge.challenge",
+			"summary": "Registers as a provider for when the user should be challenged in order to confirm access to a capability through a pin prompt",
+			"params": [
+				{
+					"name": "requestor",
+					"required": true,
+					"schema": {
+						"description": "The identity of which app is requesting access to this capability",
+						"$ref": "#/components/schemas/PinChallenge.ChallengeRequestor"
+					}
+				},
+				{
+					"name": "pinSpace",
+					"required": true,
+					"schema": {
+						"type": "string",
+						"description": "The pin space that this challenge is for",
+						"enum": [
+							"purchase",
+							"content"
+						]
+					}
+				},
+				{
+					"name": "capability",
+					"required": false,
+					"schema": {
+						"type": "string",
+						"description": "The capability that is gated by a pin challenge"
+					}
+				}
+			],
+			"tags": [
+				{
+					"name": "capabilities",
+					"x-provides": "xrn:firebolt:capability:usergrant:pinchallenge",
+					"x-allow-focus": true
+				}
+			],
+			"result": {
+				"name": "result",
+				"schema": {
+					"$ref": "#/components/schemas/PinChallenge.PinChallengeResult"
+				}
+			},
+			"examples": [
+				{
+					"name": "Default Example",
+					"params": [
+						{
+							"name": "capability",
+							"value": "xrn:firebolt:capability:commerce::purchase"
+						},
+						{
+							"name": "requestor",
+							"value": {
+								"id": "ReferenceApp",
+								"name": "Firebolt Reference App"
+							}
+						},
+						{
+							"name": "pinSpace",
+							"value": "purchase"
+						}
+					],
+					"result": {
+						"name": "result",
+						"value": {
+							"granted": true,
+							"reason": "correctPin"
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Discovery.signIn",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-event": "Discovery.onSignIn"
+				},
+				{
+					"name": "capabilities",
+					"x-manages": [
+						"xrn:firebolt:capability:discovery:sign-in-status"
+					]
+				}
+			],
+			"summary": "Listen to events from all apps that call Discovery.signIn",
+			"params": [
+				{
+					"name": "event",
+					"schema": {
+						"type": "object",
+						"properties": {
+							"appId": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"appId"
+						]
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default Example",
+					"params": [
+						{
+							"name": "Default Event",
+							"value": {
+								"appId": "firecert"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Discovery.signOut",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-event": "Discovery.onSignOut"
+				},
+				{
+					"name": "capabilities",
+					"x-manages": [
+						"xrn:firebolt:capability:discovery:sign-in-status"
+					]
+				}
+			],
+			"summary": "Listen to events from all apps that call Discovery.signOut",
+			"params": [
+				{
+					"name": "event",
+					"schema": {
+						"type": "object",
+						"properties": {
+							"appId": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"appId"
+						]
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default Example",
+					"params": [
+						{
+							"name": "Default Event",
+							"value": {
+								"appId": "firecert"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "HDMIInput.connectionChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-event": "HDMIInput.onConnectionChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:inputs:hdmi"
+					]
+				}
+			],
+			"summary": "Notification for when any HDMI port has a connection physically engaged or disengaged.",
+			"params": [
+				{
+					"name": "info",
+					"required": true,
+					"schema": {
+						"$ref": "#/components/schemas/HDMIInput.ConnectionChangedInfo"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default Example",
+					"params": [
+						{
+							"name": "info",
+							"value": {
+								"port": "HDMI1",
+								"connected": true
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "HDMIInput.signalChanged",
+			"tags": [
+				{
+					"name": "notifier",
+					"x-event": "HDMIInput.onSignalChanged"
+				},
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:inputs:hdmi"
+					]
+				}
+			],
+			"summary": "Notification for when any HDMI port has it's signal status changed.",
+			"params": [
+				{
+					"name": "info",
+					"required": true,
+					"schema": {
+						"$ref": "#/components/schemas/HDMIInput.SignalChangedInfo"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default Example",
+					"params": [
+						{
+							"name": "info",
+							"value": {
+								"port": "HDMI1",
+								"signal": "stable"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "HDMIInput.autoLowLatencyModeSignalChanged",
+			"summary": "Notification for changes to ALLM status of any input device.",
+			"tags": [
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:inputs:hdmi"
+					]
+				},
+				{
+					"name": "notifier",
+					"x-event": "HDMIInput.onAutoLowLatencyModeSignalChanged"
+				}
+			],
+			"params": [
+				{
+					"name": "info",
+					"required": true,
+					"schema": {
+						"$ref": "#/components/schemas/HDMIInput.AutoLowLatencyModeSignalChangedInfo"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default Example",
+					"params": [
+						{
+							"name": "info",
+							"value": {
+								"port": "HDMI1",
+								"autoLowLatencyModeSignalled": true
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "HDMIInput.lowLatencyModeChanged",
+			"summary": "Property for the low latency mode setting.",
+			"tags": [
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:inputs:hdmi"
+					]
+				},
+				{
+					"name": "notifier",
+					"x-notifier-for": "HDMIInput.lowLatencyMode",
+					"x-event": "HDMIInput.onLowLatencyModeChanged"
+				}
+			],
+			"params": [
+				{
+					"name": "enabled",
+					"schema": {
+						"type": "boolean"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default Example",
+					"params": [
+						{
+							"name": "enabled",
+							"value": true
+						}
+					]
+				},
+				{
+					"name": "Default Example #2",
+					"params": [
+						{
+							"name": "enabled",
+							"value": false
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "HDMIInput.autoLowLatencyModeCapableChanged",
+			"summary": "Property for each port auto low latency mode setting.",
+			"tags": [
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:inputs:hdmi"
+					]
+				},
+				{
+					"name": "notifier",
+					"x-subscriber-type": "global",
+					"x-notifier-for": "HDMIInput.autoLowLatencyModeCapable",
+					"x-event": "HDMIInput.onAutoLowLatencyModeCapableChanged"
+				}
+			],
+			"params": [
+				{
+					"name": "info",
+					"schema": {
+						"$ref": "#/components/schemas/HDMIInput.AutoLowLatencyModeCapableChangedInfo"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default Example",
+					"params": [
+						{
+							"name": "info",
+							"value": {
+								"port": "HDMI1",
+								"enabled": true
+							}
+						}
+					]
+				},
+				{
+					"name": "Default Example #2",
+					"params": [
+						{
+							"name": "info",
+							"value": {
+								"port": "HDMI1",
+								"enabled": false
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "HDMIInput.edidVersionChanged",
+			"summary": "Property for each port's active EDID version.",
+			"tags": [
+				{
+					"name": "capabilities",
+					"x-uses": [
+						"xrn:firebolt:capability:inputs:hdmi"
+					]
+				},
+				{
+					"name": "notifier",
+					"x-notifier-for": "HDMIInput.edidVersion",
+					"x-event": "HDMIInput.onEdidVersionChanged"
+				}
+			],
+			"params": [
+				{
+					"name": "port",
+					"required": true,
+					"schema": {
+						"$ref": "#/components/schemas/HDMIInput.HDMIPortId"
+					}
+				},
+				{
+					"name": "edidVersion",
+					"schema": {
+						"$ref": "#/components/schemas/HDMIInput.EDIDVersion"
+					}
+				}
+			],
+			"examples": [
+				{
+					"name": "Default Example",
+					"params": [
+						{
+							"name": "port",
+							"value": "HDMI1"
+						},
+						{
+							"name": "edidVersion",
+							"value": "2.0"
+						}
+					]
+				},
+				{
+					"name": "Default Example #2",
+					"params": [
+						{
+							"name": "port",
+							"value": "HDMI1"
+						},
+						{
+							"name": "edidVersion",
+							"value": "1.4"
+						}
+					]
+				}
+			]
+		}
+	],
+	"components": {
+		"schemas": {
+			"Keyboard.EmailUsage": {
+				"title": "EmailUsage",
+				"type": "string",
+				"enum": [
+					"signIn",
+					"signUp"
+				]
+			},
+			"AcknowledgeChallenge.ChallengeRequestor": {
+				"title": "ChallengeRequestor",
+				"type": "object",
+				"required": [
+					"id",
+					"name"
+				],
+				"properties": {
+					"id": {
+						"type": "string",
+						"description": "The id of the app that requested the challenge"
+					},
+					"name": {
+						"type": "string",
+						"description": "The name of the app that requested the challenge"
+					}
+				}
+			},
+			"AcknowledgeChallenge.GrantResult": {
+				"title": "GrantResult",
+				"type": "object",
+				"required": [
+					"granted"
+				],
+				"properties": {
+					"granted": {
+						"oneOf": [
+							{
+								"type": "boolean",
+								"description": "Whether the user approved or denied the challenge"
+							},
+							{
+								"const": null
+							}
+						]
+					}
+				},
+				"examples": [
+					{
+						"granted": true
+					},
+					{
+						"granted": false
+					},
+					{
+						"granted": null
+					}
+				]
+			},
+			"PinChallenge.ChallengeRequestor": {
+				"title": "ChallengeRequestor",
+				"type": "object",
+				"required": [
+					"id",
+					"name"
+				],
+				"properties": {
+					"id": {
+						"type": "string",
+						"description": "The id of the app that requested the challenge"
+					},
+					"name": {
+						"type": "string",
+						"description": "The name of the app that requested the challenge"
+					}
+				}
+			},
+			"PinChallenge.PinChallengeResult": {
+				"title": "PinChallengeResult",
+				"type": "object",
+				"required": [
+					"granted",
+					"reason"
+				],
+				"properties": {
+					"granted": {
+						"oneOf": [
+							{
+								"type": "boolean",
+								"description": "Whether the user succeeded in the pin challenge"
+							},
+							{
+								"const": null
+							}
+						]
+					},
+					"reason": {
+						"$ref": "#/components/schemas/PinChallenge.ResultReason",
+						"description": "The reason for the result "
+					}
+				}
+			},
+			"HDMIInput.ConnectionChangedInfo": {
+				"title": "ConnectionChangedInfo",
+				"type": "object",
+				"properties": {
+					"port": {
+						"$ref": "#/components/schemas/HDMIInput.HDMIPortId"
+					},
+					"connected": {
+						"type": "boolean"
+					}
+				}
+			},
+			"HDMIInput.SignalChangedInfo": {
+				"title": "SignalChangedInfo",
+				"type": "object",
+				"properties": {
+					"port": {
+						"$ref": "#/components/schemas/HDMIInput.HDMIPortId"
+					},
+					"signal": {
+						"$ref": "#/components/schemas/HDMIInput.HDMISignalStatus"
+					}
+				},
+				"required": [
+					"port",
+					"signal"
+				]
+			},
+			"HDMIInput.AutoLowLatencyModeSignalChangedInfo": {
+				"title": "AutoLowLatencyModeSignalChangedInfo",
+				"type": "object",
+				"properties": {
+					"port": {
+						"$ref": "#/components/schemas/HDMIInput.HDMIPortId"
+					},
+					"autoLowLatencyModeSignalled": {
+						"type": "boolean"
+					}
+				}
+			},
+			"HDMIInput.AutoLowLatencyModeCapableChangedInfo": {
+				"title": "AutoLowLatencyModeCapableChangedInfo",
+				"type": "object",
+				"properties": {
+					"port": {
+						"$ref": "#/components/schemas/HDMIInput.HDMIPortId"
+					},
+					"enabled": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"port",
+					"enabled"
+				]
+			},
+			"HDMIInput.HDMIPortId": {
+				"type": "string",
+				"pattern": "^HDMI[0-9]+$"
+			},
+			"HDMIInput.EDIDVersion": {
+				"title": "EDIDVersion",
+				"type": "string",
+				"enum": [
+					"1.4",
+					"2.0",
+					"unknown"
+				]
+			},
+			"PinChallenge.ResultReason": {
+				"title": "ResultReason",
+				"type": "string",
+				"description": "The reason for the result of challenging the user",
+				"enum": [
+					"noPinRequired",
+					"noPinRequiredWindow",
+					"exceededPinFailures",
+					"correctPin",
+					"cancelled"
+				]
+			},
+			"HDMIInput.HDMISignalStatus": {
+				"type": "string",
+				"enum": [
+					"none",
+					"stable",
+					"unstable",
+					"unsupported",
+					"unknown"
+				]
+			},
+			"https://meta.rdkcentral.com/firebolt/schemas/localization": {
+				"title": "Localization",
+				"$id": "https://meta.rdkcentral.com/firebolt/schemas/localization",
+				"oneOf": [
+					{
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/localization#/definitions/Locality"
+					},
+					{
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/localization#/definitions/CountryCode"
+					},
+					{
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/localization#/definitions/Language"
+					},
+					{
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/localization#/definitions/Locale"
+					},
+					{
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/localization#/definitions/TimeZone"
+					}
+				],
+				"definitions": {
+					"CountryCode": {
+						"type": "string",
+						"pattern": "^[A-Z]{2}$"
+					},
+					"Language": {
+						"type": "string",
+						"pattern": "^[A-Za-z]{2}$"
+					},
+					"ISO639_2Language": {
+						"type": "string",
+						"pattern": "^[a-z]{3}$"
+					},
+					"Locality": {
+						"type": "string"
+					},
+					"Locale": {
+						"type": "string",
+						"pattern": "^[a-zA-Z]+([a-zA-Z0-9\\-]*)$"
+					},
+					"TimeZone": {
+						"type": "string",
+						"pattern": "^[-+_/ A-Za-z 0-9]*$"
+					}
+				}
+			},
+			"https://meta.rdkcentral.com/firebolt/schemas/accessibility": {
+				"$id": "https://meta.rdkcentral.com/firebolt/schemas/accessibility",
+				"title": "Accessibility",
+				"definitions": {
+					"FontFamily": {
+						"type": [
+							"string",
+							"null"
+						],
+						"enum": [
+							"monospaced_serif",
+							"proportional_serif",
+							"monospaced_sanserif",
+							"proportional_sanserif",
+							"smallcaps",
+							"cursive",
+							"casual",
+							null
+						]
+					},
+					"FontSize": {
+						"type": [
+							"number",
+							"null"
+						],
+						"minimum": 0
+					},
+					"FontEdge": {
+						"type": [
+							"string",
+							"null"
+						],
+						"enum": [
+							"none",
+							"raised",
+							"depressed",
+							"uniform",
+							"drop_shadow_left",
+							"drop_shadow_right",
+							null
+						]
+					},
+					"Color": {
+						"type": [
+							"string",
+							"null"
+						]
+					},
+					"Opacity": {
+						"type": [
+							"number",
+							"null"
+						],
+						"minimum": 0,
+						"maximum": 100
+					},
+					"HorizontalAlignment": {
+						"type": [
+							"string",
+							"null"
+						]
+					},
+					"VerticalAlignment": {
+						"type": [
+							"string",
+							"null"
+						]
+					},
+					"SpeechRate": {
+						"title": "SpeechRate",
+						"type": "number",
+						"minimum": 0.1,
+						"maximum": 10
+					}
+				}
+			},
+			"https://meta.rdkcentral.com/firebolt/schemas/advertising": {
+				"title": "Advertising",
+				"$id": "https://meta.rdkcentral.com/firebolt/schemas/advertising",
+				"oneOf": [
+					{
+						"$ref": "https://meta.rdkcentral.com/firebolt/schemas/advertising#/definitions/SkipRestriction"
+					}
+				],
+				"definitions": {
+					"SkipRestriction": {
+						"title": "SkipRestriction",
+						"$comment": "xrn:advertising:policy:skipRestriction:",
+						"type": "string",
+						"enum": [
+							"none",
+							"adsUnwatched",
+							"adsAll",
+							"all"
+						],
+						"description": "The advertisement skip restriction.\n\nApplies to fast-forward/rewind (e.g. trick mode), seeking over an entire opportunity (e.g. jump), seeking out of what's currently playing, and \"Skip this ad...\" features. Seeking over multiple ad opportunities only requires playback of the _last_ opportunity, not all opportunities, preceding the seek destination.\n\n| Value        | Description                                                                    |\n|--------------|--------------------------------------------------------------------------------|\n| none         |No fast-forward, jump, or skip restrictions                                    |\n| adsUnwatched | Restrict fast-forward, jump, and skip for unwatched ad opportunities only.     |\n| adsAll       | Restrict fast-forward, jump, and skip for all ad opportunities                 |\n| all          | Restrict fast-forward, jump, and skip for all ad opportunities and all content |\n\nNamespace: `xrn:advertising:policy:skipRestriction:`\n\n"
+					}
+				}
+			}
+		}
+	}
+}
