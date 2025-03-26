@@ -31,9 +31,21 @@ option(ENABLE_COVERAGE "Enable code coverage build." ON)
 option(ENABLE_INTERACTIVE_APP "Enable interactive application" OFF)
 option(FIREBOLT_PLAIN_LOG "Disable log coloring" OFF)
 
-file(GLOB APP_SCHEMA "./firebolt-*-app-open-rpc.json")
+set(SDK_TARGET "core" CACHE STRING "SDK to built")
+
+add_compile_definitions(SDK_TARGET=${SDK_TARGET})
+
+include_directories(
+    ${SDK_TARGET}/include
+    ${SDK_TARGET}/src
+)
+
+file(GLOB APP_SCHEMA "./generated/${SDK_TARGET}/firebolt-${SDK_TARGET}-app-open-rpc.json")
 if (APP_SCHEMA)
+  message("APP schema present")
   set(ENABLE_BIDIRECTIONAL ON)
+else()
+  message("APP schema not present")
 endif ()
 
 if (ENABLE_BIDIRECTIONAL)
