@@ -39,14 +39,9 @@ endif ()
 
 message("Building SDK: ${SDK_TARGET}")
 add_compile_definitions(SDK_TARGET=${SDK_TARGET})
-add_compile_definitions(JSON_ENGINE_OPENRPC_FILE="${CMAKE_CURRENT_SOURCE_DIR}/../generated/${SDK_TARGET}/firebolt-${SDK_TARGET}-open-rpc.json")
+add_compile_definitions(JSON_ENGINE_OPENRPC_FILE="${CMAKE_CURRENT_SOURCE_DIR}/../api/${SDK_TARGET}/firebolt-${SDK_TARGET}-open-rpc.json")
 
-include_directories(
-    ${SDK_TARGET}/include
-    ${SDK_TARGET}/src
-)
-
-file(GLOB APP_SCHEMA "./generated/${SDK_TARGET}/firebolt-${SDK_TARGET}-app-open-rpc.json")
+file(GLOB APP_SCHEMA "./api/${SDK_TARGET}/firebolt-${SDK_TARGET}-app-open-rpc.json")
 if (NOT APP_SCHEMA)
   set(ENABLE_BIDIRECTIONAL OFF)
 endif ()
@@ -73,6 +68,11 @@ if (FIREBOLT_ENABLE_STATIC_LIB)
 else ()
     set(FIREBOLT_LIBRARY_TYPE SHARED)
 endif ()
+
+include_directories(
+    ${SDK_TARGET}/include
+    ${SDK_TARGET}/src
+)
 
 include(FetchContent)
 

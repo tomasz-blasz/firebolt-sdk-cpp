@@ -37,8 +37,8 @@ else ()
     list(APPEND SOURCES Event/unidi/Event.cpp)
 endif ()
 
-file(GLOB SOURCES_GENERATED ../generated/${SDK_TARGET}/src/*.cpp)
-list(APPEND SOURCES ${SOURCES_GENERATED})
+file(GLOB SOURCES_API ../api/${SDK_TARGET}/src/*.cpp)
+list(APPEND SOURCES ${SOURCES_API})
 
 add_library(${TARGET} ${FIREBOLT_LIBRARY_TYPE} ${SOURCES})
 
@@ -63,8 +63,8 @@ target_link_libraries(${TARGET}
 
 target_include_directories(${TARGET}
     PRIVATE
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../generated/${SDK_TARGET}/include>
+        $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
+        $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/api/${SDK_TARGET}/include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}>
 )
 
