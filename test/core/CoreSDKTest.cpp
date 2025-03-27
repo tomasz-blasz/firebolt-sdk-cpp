@@ -213,15 +213,10 @@ void CoreSDKTest::provider_trigger(nlohmann::json provider)
 
 void CoreSDKTest::ConnectionChanged(const bool connected, const Firebolt::Error error)
 {
-#ifndef INTERACTIVE_APP
-    cout << "Change in connection: connected: " << connected << " error: " << static_cast<int>(error) << endl;
-    _connected = connected;
-#else
     if (!_connected) {
         cout << "Change in connection: connected: " << connected << " error: " << static_cast<int>(error) << endl;
         _connected = connected;
     }
-#endif
 }
 
 void CoreSDKTest::CreateFireboltInstance(const std::string& url)
