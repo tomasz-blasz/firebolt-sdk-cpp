@@ -9,6 +9,7 @@ usage()
    echo "    -c clear build"
    echo "    -l enable static build"
    echo "    -i enable interactive application"
+   echo "    -u disable unit tests (to allow testing with the transport)"
    echo "    -h : help"
    echo
    echo "Thunder's sysroot can be set via environment: SYSROOT_PATH"
@@ -22,8 +23,9 @@ SysrootPath=${SYSROOT_PATH}
 ClearBuild="N"
 EnableStaticLib="OFF"
 EnableInteractiveApp="OFF"
+EnableUnitTests="ON"
 SdkTarget=
-while getopts t:p:s:clbih flag
+while getopts t:p:s:clbiuh flag
 do
     case "${flag}" in
         t) SdkTarget="${OPTARG}";;
@@ -32,6 +34,7 @@ do
         c) ClearBuild="Y";;
         l) EnableStaticLib="ON";;
         i) EnableInteractiveApp="ON";;
+        u) EnableUnitTests="OFF";;
         h) usage && exit 1;;
     esac
 done
@@ -58,6 +61,7 @@ cmake -B${BuildDir} -S${SdkPath} \
   -DHIDE_NON_EXTERNAL_SYMBOLS=OFF \
   -DFIREBOLT_ENABLE_STATIC_LIB=${EnableStaticLib} \
   -DENABLE_INTERACTIVE_APP=${EnableInteractiveApp} \
+  -DENABLE_UNIT_TESTS=${EnableUnitTests} \
   -DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}" \
 || exit 1
 
