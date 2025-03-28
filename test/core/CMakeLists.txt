@@ -44,12 +44,12 @@ set(TESTAPP TestFireboltCore)
 
 message("Setup ${TESTAPP}")
 
-if (NOT ENABLE_INTERACTIVE_APP)
-    add_executable(${TESTAPP} CoreSDKTest.cpp Main.cpp)
-    add_compile_definitions(TESTS_ENABLED)
-else ()
+if (ENABLE_INTERACTIVE_APP)
     add_executable(${TESTAPP} CoreSDKTest.cpp InteractiveApp.cpp)
     add_compile_definitions(INTERACTIVE_APP)
+else ()
+    add_executable(${TESTAPP} CoreSDKTest.cpp Main.cpp)
+    add_compile_definitions(TESTS_ENABLED)
 endif ()
 
 target_link_libraries(${TESTAPP}
@@ -86,44 +86,49 @@ add_custom_command(
         COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/${TESTAPP} ${CMAKE_BINARY_DIR}/${FIREBOLT_NAMESPACE}/usr/bin
 )
 
-set(UNIT_TESTS_APP FireboltCoreUnitTests)
+if(ENABLE_UNIT_TESTS)
+    set(UNIT_TESTS_APP FireboltCoreUnitTests)
 
-message("Setup ${UNIT_TESTS_APP}")
+    message("Setup ${UNIT_TESTS_APP}")
+    if (ENABLE_UNIT_TESTS)
+        add_compile_definitions(UNIT_TEST_SUITE)
+    endif()
 
-file(GLOB UNIT_TESTS "unit/*")
+    file(GLOB UNIT_TESTS "unit/*")
 
-add_compile_definitions(UNIT_TEST_APP)
+    add_compile_definitions(UNIT_TEST_APP)
 
-add_executable(${UNIT_TESTS_APP} 
-    CoreSDKTest.cpp
-    Unit.cpp
-    ${UNIT_TESTS}
-)
+    add_executable(${UNIT_TESTS_APP} 
+        CoreSDKTest.cpp
+        Unit.cpp
+        ${UNIT_TESTS}
+    )
 
-link_directories(${SYSROOT_PATH}/usr/lib/)
-target_link_libraries(${UNIT_TESTS_APP}
-    PRIVATE
-        ${NAMESPACE}Core::${NAMESPACE}Core
-        ${FIREBOLT_NAMESPACE}SDK::${FIREBOLT_NAMESPACE}SDK
-        nlohmann_json::nlohmann_json
-        nlohmann_json_schema_validator::validator
-        GTest::gtest_main
-)
+    link_directories(${SYSROOT_PATH}/usr/lib/)
+    target_link_libraries(${UNIT_TESTS_APP}
+        PRIVATE
+            ${NAMESPACE}Core::${NAMESPACE}Core
+            ${FIREBOLT_NAMESPACE}SDK::${FIREBOLT_NAMESPACE}SDK
+            nlohmann_json::nlohmann_json
+            nlohmann_json_schema_validator::validator
+            GTest::gtest_main
+    )
 
-target_include_directories(${UNIT_TESTS_APP}
-    PRIVATE
-        $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include/>
-        $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/>
-        $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/api/${SDK_TARGET}/include/>
-)
+    target_include_directories(${UNIT_TESTS_APP}
+        PRIVATE
+            $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include/>
+            $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src/>
+            $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/api/${SDK_TARGET}/include/>
+    )
 
-set_target_properties(${UNIT_TESTS_APP} PROPERTIES
-    CXX_STANDARD 17
-    CXX_STANDARD_REQUIRED YES
-)
+    set_target_properties(${UNIT_TESTS_APP} PROPERTIES
+        CXX_STANDARD 17
+        CXX_STANDARD_REQUIRED YES
+    )
 
-include(GoogleTest)
-gtest_discover_tests(${UNIT_TESTS_APP})
+    include(GoogleTest)
+    gtest_discover_tests(${UNIT_TESTS_APP})
+endif ()
 
 if(ENABLE_COVERAGE)
     include(${CMAKE_SOURCE_DIR}/cmake/CodeCoverage.cmake)
