@@ -59,6 +59,8 @@ target_link_libraries(${TARGET}
         ${NAMESPACE}Core::${NAMESPACE}Core
         ${NAMESPACE}WebSocket::${NAMESPACE}WebSocket
         ${NAMESPACE}Cryptalgo::${NAMESPACE}Cryptalgo
+    PRIVATE
+        GTest::gtest
 )
 
 target_include_directories(${TARGET}

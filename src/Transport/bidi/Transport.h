@@ -20,7 +20,9 @@
 #include <memory>
 #include "Module.h"
 #include "error.h"
+#ifdef UNIT_TEST
 #include "json_engine.h"
+#endif
 #include "Transport/CommunicationChannel.h"
 
 namespace FireboltSDK

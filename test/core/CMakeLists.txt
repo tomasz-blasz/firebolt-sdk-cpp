@@ -56,8 +56,9 @@ target_link_libraries(${TESTAPP}
     PRIVATE
         ${NAMESPACE}Core::${NAMESPACE}Core
         ${FIREBOLT_NAMESPACE}SDK::${FIREBOLT_NAMESPACE}SDK
-        nlohmann_json_schema_validator
-        gtest_main
+        nlohmann_json::nlohmann_json
+        nlohmann_json_schema_validator::validator
+        GTest::gtest_main
 )
 
 target_include_directories(${TESTAPP}
@@ -99,13 +100,14 @@ add_executable(${UNIT_TESTS_APP}
     ${UNIT_TESTS}
 )
 
-link_directories(${CMAKE_SOURCE_DIR}/../../Thunder/install/usr/lib/)
+link_directories(${SYSROOT_PATH}/usr/lib/)
 target_link_libraries(${UNIT_TESTS_APP}
     PRIVATE
         ${NAMESPACE}Core::${NAMESPACE}Core
         ${FIREBOLT_NAMESPACE}SDK::${FIREBOLT_NAMESPACE}SDK
-        nlohmann_json_schema_validator
-        gtest_main
+        nlohmann_json::nlohmann_json
+        nlohmann_json_schema_validator::validator
+        GTest::gtest_main
 )
 
 target_include_directories(${UNIT_TESTS_APP}

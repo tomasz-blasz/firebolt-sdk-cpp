@@ -76,30 +76,41 @@ include_directories(
 
 include(FetchContent)
 
-message("Fetching nlohmann json... ")
-set(nlohmann_json_VERSION v3.11.3 CACHE STRING "Fetch nlohmann::json version")
+set(nlohmann_json_VERSION v3.11.3 CACHE STRING "Referenced by nlohmann_json_schema_validator")
 FetchContent_Declare(
     nlohmann_json
     GIT_REPOSITORY https://github.com/nlohmann/json
-    GIT_TAG ${nlohmann_json_VERSION}
+    GIT_TAG 9cca280a4d0ccf0c08f47a99aa71d1b0e52f8d03 # v3.11.3
+    FIND_PACKAGE_ARGS
 )
-FetchContent_MakeAvailable(nlohmann_json)
 
-message("Fetching nlohmann json-schema-validator... ")
 FetchContent_Declare(
     nlohmann_json_schema_validator
     GIT_REPOSITORY https://github.com/pboettch/json-schema-validator.git
-    GIT_TAG 2.3.0
+    GIT_TAG 349cba9f7e3cb423bbc1811bdd9f6770f520b468 # 2.3.0
+    FIND_PACKAGE_ARGS
 )
-FetchContent_MakeAvailable(nlohmann_json_schema_validator)
 
-message("Fetching googletest... ")
 FetchContent_Declare(
     googletest
     GIT_REPOSITORY https://github.com/google/googletest
-    GIT_TAG v1.15.2
+    GIT_TAG b514bdc898e2951020cbdca1304b75f5950d1f59 # v1.15.2
+    FIND_PACKAGE_ARGS NAMES GTest
 )
-FetchContent_MakeAvailable(googletest)
+
+message("Fetching external projects... ")
+
+set(BUILD_SHARED_LIBS_OLD ${BUILD_SHARED_LIBS})
+set(BUILD_SHARED_LIBS ON CACHE BOOL "" FORCED)
+set(JSON_VALIDATOR_SHARED_LIBS ON CACHE BOOL "")
+
+FetchContent_MakeAvailable(nlohmann_json nlohmann_json_schema_validator googletest)
+
+set(BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS_OLD} CACHE BOOL "" FORCED)
+
+FetchContent_GetProperties(nlohmann_json)
+FetchContent_GetProperties(nlohmann_json_schema_validator)
+FetchContent_GetProperties(googletest)
 
 include_directories(
     ${nlohmann_json_SOURCE_DIR}/include
@@ -141,3 +152,4 @@ endif()
 configure_file( "${CMAKE_SOURCE_DIR}/cmake/project.cmake.in"
         "${CMAKE_BINARY_DIR}/${FIREBOLT_NAMESPACE}Config.cmake"
     @ONLY)
+

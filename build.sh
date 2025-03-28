@@ -39,24 +39,26 @@ done
 case ${SdkTarget} in
 core | manage | discovery);;
 *)
-    echo "Wrong SDK provided ('${SdkTarget}')"
+    echo "Wrong SDK provided: '${SdkTarget}'"
     usage
     exit 1;;
 esac
 
+BuildDir="${SdkPath}/build/${SdkTarget}"
+
 if [ "${ClearBuild}" == "Y" ];
 then
-    rm -rf ${SdkPath}/build
+    rm -rf ${BuildDir}
 fi
 
-BuildDir="${SdkPath}/build/${SdkTarget}"
-rm -rf ${SdkPath}/build/src/libFireboltSDK.so
+rm -f ${BuildDir}/src/libFireboltSDK.so*
 cmake -B${BuildDir} -S${SdkPath} \
   -DSDK_TARGET=${SdkTarget} \
   -DSYSROOT_PATH=${SysrootPath} \
   -DHIDE_NON_EXTERNAL_SYMBOLS=OFF \
   -DFIREBOLT_ENABLE_STATIC_LIB=${EnableStaticLib} \
   -DENABLE_INTERACTIVE_APP=${EnableInteractiveApp} \
+  -DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}" \
 || exit 1
 
 cmake --build ${BuildDir} || exit 1
